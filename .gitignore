@@ -12,9 +12,7 @@ __pycache__/
 
 # Model weights (large files — mount these separately in deployment)
 checkptc/
-*.pth
 *.pt
-*.h5
 *.keras
 *.tflite
 
