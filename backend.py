@@ -7,7 +7,7 @@ import io
 #  INFO
 # ============================
 infoa = {
-    "healthy": {
+    "Healthy": {
         "title": "Plant appears healthy 🌱",
         "cause": "No visible disease symptoms detected.",
         "advice": "Continue regular monitoring and proper irrigation."
