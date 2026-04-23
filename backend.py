@@ -101,7 +101,7 @@ infoa = {
 # ------------------------
 # CONFIG
 # ------------------------
-API_URL = "http://127.0.0.1:8000/predict"  # change after deployment
+API_URL = "https://eage-ai-plant.onrender.com/predict"  # change after deployment
 
 st.set_page_config(
     page_title="AgroAI 🌱",
