@@ -165,7 +165,7 @@ if uploaded_file is not None:
                 # ------------------------
                 # HEALTHY CHECK
                 # ------------------------
-                if "Healthy" in result["disease"].lower():
+                if "healthy" in result["disease"].lower():
                     st.success("✅ Healthy leaf")
                     st.stop()
 
