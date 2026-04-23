@@ -8,7 +8,7 @@ from utils import transform, extract_label_parts
 
 logger = logging.getLogger(__name__)
 
-CONF_THRESHOLD = float(0.75)
+CONF_THRESHOLD = float(0.60)
 
 DISEASE_INFO = {
     "healthy": {
@@ -160,6 +160,26 @@ def run_full_pipeline(img_pil, crop_model, crop_classes,
     label     = extract_label_parts(disease)
     label_key = label.title()
     insight   = get_disease_info(label_key)
+    disease_conf_val = float(disease_conf.item())
+
+    # Enforce confidence gate
+    if disease_conf_val < CONF_THRESHOLD:
+      return {
+        'crop': crop,
+        'crop_confidence': round(crop_conf_val, 4),
+        'disease': 'uncertain',
+        'disease_confidence': round(disease_conf_val, 4),
+        'severity': 0.0,
+        'label': 'Uncertain',
+        'insight': {
+            'title': 'Low confidence result',
+            'cause': 'The model is not confident about this image.',
+            'advice': 'Retake in good natural lighting with the leaf filling the frame.'
+        },
+        'below_threshold': True
+    }
+
+
 
     return {
         "crop":               crop,
