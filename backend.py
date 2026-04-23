@@ -158,7 +158,7 @@ if uploaded_file is not None:
                 # ------------------------
                 st.success(f"🌱 Crop: {result['crop']}")
                 disease = result["disease"].replace("_", " ")[1:]
-                st.error(f"🦠 Disease: {disease})
+                st.error(f"🦠 Disease: {disease}")
                 st.info(f"🩺 Severity: {result['severity']:.2f}%")
                 st.markdown(f"### 🧾 Info: {infoa.get(result['disease'], {'title': 'No info available', 'cause': '', 'advice': ''})['title']}")
 
