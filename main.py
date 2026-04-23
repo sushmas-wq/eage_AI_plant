@@ -70,7 +70,7 @@ async def read_image(file: UploadFile) -> Image.Image:
     contents = await file.read()
     try:
         image = Image.open(io.BytesIO(contents)).convert("RGB")
-        return image
+        
     except Exception:
         raise HTTPException(
             status_code=400,
