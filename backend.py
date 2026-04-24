@@ -6,7 +6,7 @@ import io
 # ===========================
 #  INFO
 # ============================
-from fastapi.middleware.cors import CORSMiddleware
+
 
 
 infoa = {
