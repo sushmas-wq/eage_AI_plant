@@ -18,13 +18,6 @@ from utils import bgr_to_base64
 from fastapi.middleware.cors import CORSMiddleware
 # ============================
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # for now (later restrict)
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -66,13 +59,15 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],    # tighten this in production
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
