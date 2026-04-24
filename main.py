@@ -70,23 +70,24 @@ app.add_middleware(
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-
 async def read_image(file: UploadFile) -> Image.Image:
     contents = await file.read()
     try:
-        image = Image.open(io.BytesIO(contents)).convert("RGB")
-        
+        img = Image.open(io.BytesIO(contents))  # keep original object
+        fmt = img.format  # store format BEFORE convert
+        img = img.convert("RGB")
     except Exception:
         raise HTTPException(
             status_code=400,
             detail="Could not decode image. Upload a valid JPEG or PNG file."
         )
-    # Validate format after opening — don't trust the content-type header
-    if img.format not in ("JPEG", "PNG"):
+
+    if fmt not in ("JPEG", "PNG"):
         raise HTTPException(
             status_code=415,
-            detail=f"Unsupported format '{img.format}'. Upload JPEG or PNG."
+            detail=f"Unsupported format '{fmt}'. Upload JPEG or PNG."
         )
+
     return img
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────
