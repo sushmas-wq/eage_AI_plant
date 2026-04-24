@@ -6,6 +6,9 @@ import io
 # ===========================
 #  INFO
 # ============================
+from fastapi.middleware.cors import CORSMiddleware
+
+
 infoa = {
     "Healthy": {
         "title": "Plant appears healthy 🌱",
