@@ -14,6 +14,17 @@ from PIL import Image
 from models import load_crop_model, load_disease_model, DEVICE
 from inference import run_full_pipeline, build_overlay
 from utils import bgr_to_base64
+# ============================
+from fastapi.middleware.cors import CORSMiddleware
+# ============================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # for now (later restrict)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
