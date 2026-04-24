@@ -2,8 +2,7 @@ import logging
 import numpy as np
 import torch
 import torch.nn.functional as F
-from PIL import Image
-import cv2                    
+from PIL import Image                  
 from utils import transform, extract_label_parts
 
 logger = logging.getLogger(__name__)
