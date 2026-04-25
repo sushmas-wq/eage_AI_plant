@@ -7,7 +7,7 @@ from utils import transform, extract_label_parts
 
 logger = logging.getLogger(__name__)
 
-CONF_THRESHOLD = float(0.60)
+CONF_THRESHOLD = float(0.50)
 
 DISEASE_INFO = {
     "healthy": {
