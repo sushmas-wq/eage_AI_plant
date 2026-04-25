@@ -128,7 +128,11 @@ uploaded_file = st.file_uploader("📤 Upload a leaf image", type=["jpg", "png"]
 # ------------------------
 # MAIN LOGIC
 # ------------------------
-if uploaded_file is not None:
+contents = await uploaded_file.read()
+
+if uploaded_file is not None and len(contents) < 1 * 1024 * 1024:
+    print("File is less than 1MB")
+
     img = Image.open(uploaded_file).convert("RGB")
     st.image(img, caption="Uploaded Image", use_container_width=True)
 
@@ -184,3 +188,5 @@ if uploaded_file is not None:
             except Exception as e:
                 st.error("Something went wrong")
                 st.write(e)
+            else:
+             raise HTTPException(status_code=400, detail="File too large")
