@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 CONF_THRESHOLD = float(0.50)
 
 DISEASE_INFO = {
-    "healthy": {
+    "Healthy": {
         "title": "Plant appears healthy 🌱",
         "cause": "No visible disease symptoms detected.",
         "advice": "Continue regular monitoring and proper irrigation."
