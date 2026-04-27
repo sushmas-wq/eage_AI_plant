@@ -1,5 +1,5 @@
-Here's what a new user needs to know to clone and run AgroAI locally:
-1] Clone the repo and get inside it. Open your terminal and run git clone https://github.com/sushmas-wq/eage_AI_plant.git followed by cd eage_AI_plant. Everything you need lives in this folder.
+Here's what a new user needs to know to clone and run AgroAI locally:\n
+1] Clone the repo and get inside it. Open your terminal and run git clone https://github.com/sushmas-wq/eage_AI_plant.git followed by cd eage_AI_plant. Everything you need lives in this folder.\n
 2] Set up a clean Python environment. Before installing anything, create a virtual environment so the dependencies don't conflict with other projects on your machine: python -m venv venv then source venv/bin/activate (Mac/Linux) or venv\Scripts\activate (Windows). You'll see (venv) appear in your terminal — that means it's active.
 3] Install the dependencies. Run pip install -r requirements.txt. This pulls in FastAPI, PyTorch, OpenCV, and everything else the project needs. It may take a few minutes the first time.
 4] Get the model checkpoints. The trained AI models are not included in the repo — contact the project author to get them. Once you have them, create a folder called checkptc in the project root and place all the .pth files inside it. Without this step the server will refuse to start.
