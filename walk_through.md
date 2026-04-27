@@ -11,7 +11,7 @@ Open your terminal and run:
 
 ```bash
 git clone https://github.com/sushmas-wq/eage_AI_plant.git
-cd eage_AI_plant
+cd eage_AI_plant /bash```
 
 ## 2. Set up a clean Python environment. Before installing anything, create a virtual environment so the dependencies don't conflict with other projects on your machine: python -m venv venv then source venv/bin/activate (Mac/Linux) or venv\Scripts\activate (Windows). You'll see (venv) appear in your terminal — that means it's active.
 ## 3. Install the dependencies. Run pip install -r requirements.txt. This pulls in FastAPI, PyTorch, OpenCV, and everything else the project needs. It may take a few minutes the first time.
