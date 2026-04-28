@@ -74,6 +74,7 @@ async def read_image(file: UploadFile) -> Image.Image:
     contents = await file.read()
     try:
         img = Image.open(io.BytesIO(contents))  # keep original object
+        img = cv2.resize(img, (224, 224))
         fmt = img.format  # store format BEFORE convert
         img = img.convert("RGB")
     except Exception:
