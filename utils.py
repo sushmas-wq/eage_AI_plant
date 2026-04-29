@@ -87,11 +87,15 @@ def detect_white_fungus(segmented_bgr, leaf_mask):
 
 def disease_color_mask(segmented, leaf_mask):
     hsv          = cv2.cvtColor(segmented, cv2.COLOR_BGR2HSV)
+    lower_white = np.array([0, 0, 180])
+    upper_white = np.array([180, 50, 255])
+    white_mask  = cv2.inRange(hsv, lower_white, upper_white)
     lower_brown  = np.array([8, 80, 50]);   upper_brown  = np.array([25, 255, 200])
     lower_yellow = np.array([18, 80, 80]);  upper_yellow = np.array([35, 255, 255])
     brown        = cv2.inRange(hsv, lower_brown,  upper_brown)
     yellow       = cv2.inRange(hsv, lower_yellow, upper_yellow)
-    color_mask   = cv2.bitwise_or(brown, yellow)
+    white_mask  = cv2.inRange(hsv, lower_white, upper_white)
+    color_mask   = cv2.bitwise_or(brown, yellow,white_mask)
     color_mask   = cv2.bitwise_and(color_mask, color_mask, mask=leaf_mask)
     return (color_mask > 0).astype(np.uint8)
 
