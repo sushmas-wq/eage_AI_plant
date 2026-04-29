@@ -4,7 +4,7 @@ import asyncio
 from contextlib import asynccontextmanager
 from functools import lru_cache
 
-import cv2
+import cv2 as cv
 import numpy as np
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
