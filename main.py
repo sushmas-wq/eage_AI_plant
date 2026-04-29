@@ -72,23 +72,27 @@ app.add_middleware(
 # ── Helpers ───────────────────────────────────────────────────────────────────
 async def read_image(file: UploadFile) -> Image.Image:
     contents = await file.read()
+
+
     try:
-        img = Image.open(io.BytesIO(contents))  # keep original object
-        img = np.array(img)              # convert to NumPy FIRST
+        pil_img = Image.open(io.BytesIO(contents))  # ORIGINAL IMAGE
+        fmt = pil_img.format  # ✅ capture format HERE
+
+        if fmt not in ("JPEG", "PNG"):
+            raise HTTPException(
+                status_code=415,
+                detail=f"Unsupported format '{fmt}'. Upload JPEG or PNG."
+            )
+
+        # Now process image
+        img = np.array(pil_img)
         img = cv2.resize(img, (224, 224))
-        img = Image.fromarray(img)  
-        fmt = img.format  # store format BEFORE convert
-        img = img.convert("RGB")
+        img = Image.fromarray(img).convert("RGB")
+
     except Exception:
         raise HTTPException(
             status_code=400,
             detail="Could not decode image. Upload a valid JPEG or PNG file."
-        )
-
-    if fmt not in ("JPEG", "PNG"):
-        raise HTTPException(
-            status_code=415,
-            detail=f"Unsupported format '{fmt}'. Upload JPEG or PNG."
         )
 
     return img
