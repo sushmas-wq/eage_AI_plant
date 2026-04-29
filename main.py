@@ -70,34 +70,38 @@ app.add_middleware(
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+from PIL import Image, ImageOps
+
 async def read_image(file: UploadFile) -> Image.Image:
-    file.file.seek(0)
-    contents = await file.read()
-
-
     try:
-        pil_img = Image.open(io.BytesIO(contents))  # ORIGINAL IMAGE
-        fmt = pil_img.format  # ✅ capture format HERE
-        logger.info(f"Format: {fmt}, Size: {pil_img.size}, Mode: {pil_img.mode}")
+        contents = await file.read()
 
-        if fmt not in ("JPEG", "PNG"):
-            raise HTTPException(
-                status_code=415,
-                detail=f"Unsupported format '{fmt}'. Upload JPEG or PNG."
-            )
+        if not contents:
+            raise ValueError("Empty file")
 
-        # Now process image
-        img = np.array(pil_img)
-        img = cv2.resize(img, (224, 224))
-        img = Image.fromarray(img).convert("RGB")
+        
+        pil_img = Image.open(io.BytesIO(contents))
 
-    except Exception:
+
+        pil_img = ImageOps.exif_transpose(pil_img)
+
+        
+        pil_img.load()
+
+        # Convert safely
+        pil_img = pil_img.convert("RGB")
+
+        # Resize
+        pil_img = pil_img.resize((224, 224))
+
+        return pil_img
+
+    except Exception as e:
+        print("REAL ERROR:", str(e))  # 👈 TEMP DEBUG
         raise HTTPException(
             status_code=400,
-            detail="Could not decode image. Upload a valid JPEG or PNG file."
+            detail=f"Could not decode image: {str(e)}"
         )
-
-    return img
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────
 @app.get("/health", tags=["meta"])
