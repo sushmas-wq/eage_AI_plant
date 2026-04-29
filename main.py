@@ -78,6 +78,7 @@ async def read_image(file: UploadFile) -> Image.Image:
     try:
         pil_img = Image.open(io.BytesIO(contents))  # ORIGINAL IMAGE
         fmt = pil_img.format  # ✅ capture format HERE
+        logger.info(f"Format: {fmt}, Size: {pil_img.size}, Mode: {pil_img.mode}")
 
         if fmt not in ("JPEG", "PNG"):
             raise HTTPException(
