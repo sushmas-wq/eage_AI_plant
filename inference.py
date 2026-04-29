@@ -65,7 +65,7 @@ DISEASE_INFO = {
         "cause": "Fungal disease spread by airborne spores in humid conditions.",
         "advice": "Remove infected leaves and apply fungicide if needed."
     },
-    "Powdery mildew": {
+    "Powdery Mildew": {
         "title": "Powdery Mildew detected 🌫️",
         "cause": "Fungus growing on leaf surfaces due to poor air circulation.",
         "advice": "Improve airflow and apply sulfur-based treatment."
