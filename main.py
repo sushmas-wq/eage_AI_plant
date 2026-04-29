@@ -71,6 +71,7 @@ app.add_middleware(
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 async def read_image(file: UploadFile) -> Image.Image:
+    file.file.seek(0)
     contents = await file.read()
 
 
